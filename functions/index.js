@@ -41,8 +41,6 @@ app.get('/doggos', (req,res) => {
     }
     request(dogOptions, (error, response) => { 
         if (error) throw new Error(error);
-        console.log(dogOptions);
-        // console.log(response.body);
         const dog = JSON.parse(response.body)
         res.send({dog})
       })
