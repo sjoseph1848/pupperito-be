@@ -33,11 +33,24 @@ app.get('/puppers', (req,res) => {
     request(dogOptions, (error, response) => { 
         if (error) throw new Error(error);
         const dog = JSON.parse(response.body)
-        res.send({dog})
+        console.log(getImages(dog.animals));
+        const imgs = getImages(dog.animals)
+        // res.send({dog})
+        res.send({imgs})
       })
         
       });
-})
+}) 
+
+
+function getImages(images) {
+  let img = [];
+  for (let i = 0; i < images.length; i++) {
+      if(images[i].photos.length > 0){
+        img.push(images[i].photos)
+      }
+  }
+  return img;
+}
 
 exports.dog = functions.https.onRequest(app);
-
